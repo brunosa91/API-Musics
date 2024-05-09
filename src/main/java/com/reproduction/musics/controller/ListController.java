@@ -9,6 +9,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/list")
@@ -22,10 +23,9 @@ public class ListController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<ListEntity> getListByName(@PathVariable String name) {
+    public ResponseEntity<Optional<ListEntity>> getListByName(@PathVariable String name) {
         return ResponseEntity.ok(listService.findByNameList(name));
     }
-
     @PostMapping
     public ResponseEntity<ListEntity> postList(ListEntity listEntity) {
         URI uri = ServletUriComponentsBuilder

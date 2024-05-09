@@ -1,5 +1,6 @@
 package com.reproduction.musics.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -19,8 +20,10 @@ public class ListEntity {
     @Column
     @JsonProperty("descricao")
     private String decription;
+    @PrimaryKeyJoinColumn
     @OneToMany(mappedBy = "listEntity", cascade = CascadeType.ALL)
+    @JsonIgnore
     @JsonProperty("musicas")
-    private List<MusicEntity> musicEntityList = new ArrayList<>();
+    List<MusicEntity> musicEntityList = new ArrayList<>();
 
 }
