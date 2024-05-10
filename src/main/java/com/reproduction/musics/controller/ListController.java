@@ -2,6 +2,7 @@ package com.reproduction.musics.controller;
 
 import com.reproduction.musics.dto.ListRequest;
 import com.reproduction.musics.dto.ListResponse;
+import com.reproduction.musics.mapper.Mapper;
 import com.reproduction.musics.model.ListEntity;
 import com.reproduction.musics.service.ListService;
 import jakarta.validation.Valid;
@@ -22,6 +23,8 @@ import java.util.Optional;
 public class ListController {
     @Autowired
     private ListService listService;
+    @Autowired
+    private Mapper mapper;
 
     @GetMapping
     public ResponseEntity<List<ListResponse>> getAllLists() {
@@ -35,12 +38,14 @@ public class ListController {
         return ResponseEntity.ok(listService.findByNameList(name));
     }
     @PostMapping
-    public ResponseEntity<ListEntity> postList(@RequestBody @Valid ListRequest listRequest) {
+    public ResponseEntity<ListResponse> postList(@RequestBody @Valid ListRequest listRequest) {
         log.debug("PostList Saved {}",listRequest);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}").buildAndExpand(listRequest.getId()).toUri();
-        return ResponseEntity.created(uri).body(listService.insertList(listRequest));
+        ListEntity listEntity = listService.insertList(listRequest);
+        ListResponse listResponse = mapper.entityToDtoList(listEntity);
+        return ResponseEntity.created(uri).body(listResponse);
     }
 
     @DeleteMapping("/{name}")

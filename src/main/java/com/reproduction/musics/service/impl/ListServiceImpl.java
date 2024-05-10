@@ -2,6 +2,7 @@ package com.reproduction.musics.service.impl;
 
 import com.reproduction.musics.dto.ListRequest;
 import com.reproduction.musics.dto.ListResponse;
+import com.reproduction.musics.exceptions_handler.exceptions.ListNotFound;
 import com.reproduction.musics.mapper.Mapper;
 import com.reproduction.musics.model.ListEntity;
 import com.reproduction.musics.repository.ListRepository;
@@ -46,6 +47,9 @@ public class ListServiceImpl implements ListService {
     @Override
     public ListResponse findByNameList(String name) {
        Optional <ListEntity> listEntity = listRepository.findByNome(name);
+       if(listEntity.isEmpty()){
+           throw new ListNotFound();
+       }
        ListResponse listResponse = mapper.entityToDtoList(listEntity.get());
 
         return listResponse ;
@@ -54,6 +58,9 @@ public class ListServiceImpl implements ListService {
     @Override
     public void deleteListByName(String name) {
         Optional <ListEntity> list = listRepository.findByNome(name);
+        if(list.isEmpty()){
+            throw new ListNotFound();
+        }
         listRepository.delete(list.get());
     }
 }
