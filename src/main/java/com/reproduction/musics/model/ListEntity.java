@@ -16,6 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class ListEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

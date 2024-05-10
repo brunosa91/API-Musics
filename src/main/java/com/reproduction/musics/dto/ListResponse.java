@@ -9,10 +9,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class ListResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String id;
+    private Long id;
     private String nome;
     private String descricao;
 

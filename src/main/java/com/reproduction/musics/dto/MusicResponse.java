@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class MusicResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
