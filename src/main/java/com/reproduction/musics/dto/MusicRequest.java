@@ -1,17 +1,21 @@
 package com.reproduction.musics.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
-public class MusicRequest {
+import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class MusicRequest implements Serializable {
 
-    private String title;
-
-    private String artist;
+    private static final long serialVersionUID = 1L;
+    private Long id;
+    private String titulo;
+    private String artista;
     private String album;
-      private String year;
-
-    private String genre;
+    private String ano;
+    private String genero;
     private Long idList;
 }

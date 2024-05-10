@@ -10,9 +10,12 @@ import org.mapstruct.Mapping;
 
 @org.mapstruct.Mapper(componentModel = "spring")
 public interface Mapper {
-    ListEntity dtoToEntityCategory(ListRequest listRequest);
+    ListEntity dtoToEntityList(ListRequest listRequest);
+
     ListResponse entityToDtoList(ListEntity listEntity);
+
     MusicResponse entityToDtoMusic(MusicEntity musicEntity);
-    @Mapping(target = "list.id", source = "idList")
+
+    @Mapping(target = "lista.id", source = "idList")
     MusicEntity dtoToEntityMusic(MusicRequest request);
 }

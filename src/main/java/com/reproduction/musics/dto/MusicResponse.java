@@ -1,16 +1,25 @@
 package com.reproduction.musics.dto;
 
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
-@Data
-public class MusicResponse {
-    private String title;
+import java.io.Serializable;
 
-    private String artist;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class MusicResponse implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @JsonIgnore
+    private Long id;
+    private String titulo;
+    private String artista;
     private String album;
-    private String year;
+    private String ano;
+    private String genero;
 
-    private String genre;
-    private ListResponse list;
+
 }

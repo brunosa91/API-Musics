@@ -1,32 +1,34 @@
 package com.reproduction.musics.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Entity
 @Table(name = "music_table")
-@Data
-public class MusicEntity {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class MusicEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
-    @JsonProperty("titulo")
-    private String title;
+    private String titulo;
     @Column
-    @JsonProperty("artista")
-    private String artist;
+    private String artista;
     @Column
     private String album;
     @Column
-    @JsonProperty("ano")
-    private String year;
+    private String ano;
     @Column
-    @JsonProperty("genero")
-    private String genre;
+    private String genero;
     @ManyToOne
-    private ListEntity list;
+    private ListEntity lista;
 
 
 }

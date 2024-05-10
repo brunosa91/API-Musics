@@ -1,15 +1,20 @@
 package com.reproduction.musics.dto;
 
-import lombok.Data;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-@Data
-public class ListResponse {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ListResponse implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String id;
-    private String name;
+    private String nome;
+    private String descricao;
 
-    private String decription;
-
-    List<MusicRequest> musicsList = new ArrayList<>();
+    List<MusicResponse> musicas = new ArrayList<>();
 }
