@@ -26,7 +26,7 @@ public class MusicEntity {
     @JsonProperty("genero")
     private String genre;
     @ManyToOne
-    private ListEntity listEntity;
+    private ListEntity list;
 
 
 }

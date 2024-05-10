@@ -24,6 +24,6 @@ public class ListEntity {
     @OneToMany(mappedBy = "listEntity", cascade = CascadeType.ALL)
     @JsonIgnore
     @JsonProperty("musicas")
-    List<MusicEntity> musicEntityList = new ArrayList<>();
+    List<MusicEntity> musicsList = new ArrayList<>();
 
 }
