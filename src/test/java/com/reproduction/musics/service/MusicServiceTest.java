@@ -27,8 +27,6 @@ public class MusicServiceTest {
     @Mock
     Mapper mapper;
 
-
-
     @Test
     void getMusicByTitle() {
         when(musicRepository.findByTitulo("numb")).thenReturn(Optional.of(MUSIC_ENTITY));
@@ -62,6 +60,5 @@ public class MusicServiceTest {
         Assertions.assertThat(result).isEqualTo(MUSIC_ENTITY);
         verify(musicRepository,times(1)).save(MUSIC_ENTITY);
     }
-
 
 }
