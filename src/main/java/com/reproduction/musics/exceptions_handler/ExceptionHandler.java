@@ -1,6 +1,7 @@
 package com.reproduction.musics.exceptions_handler;
 
 import com.reproduction.musics.exceptions_handler.exceptions.ListNotFound;
+import com.reproduction.musics.exceptions_handler.exceptions.MusicNotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -15,6 +16,12 @@ public class ExceptionHandler {
     public ResponseEntity<StandardError> resourceNotFound(ListNotFound listNotFound) {
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
         StandardError standardError = new StandardError(Instant.now(), httpStatus.value(), listNotFound.getMessage());
+        return ResponseEntity.status(httpStatus).body(standardError);
+    }
+    @org.springframework.web.bind.annotation.ExceptionHandler(MusicNotFound.class)
+    public ResponseEntity<StandardError> resourceNotFoundMusic(MusicNotFound musicNotFound) {
+        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        StandardError standardError = new StandardError(Instant.now(), httpStatus.value(), musicNotFound.getMessage());
         return ResponseEntity.status(httpStatus).body(standardError);
     }
 

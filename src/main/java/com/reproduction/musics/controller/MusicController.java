@@ -24,7 +24,7 @@ public class MusicController {
     @Autowired
     private Mapper mapper;
 
-    @GetMapping("/{id}")
+    @GetMapping("/{title}")
     public ResponseEntity<MusicResponse> getMusicByName(@PathVariable String title) {
         return ResponseEntity.ok(musicService.findMusicByTitle(title));
     }

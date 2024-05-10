@@ -2,6 +2,7 @@ package com.reproduction.musics.service.impl;
 
 import com.reproduction.musics.dto.MusicRequest;
 import com.reproduction.musics.dto.MusicResponse;
+import com.reproduction.musics.exceptions_handler.exceptions.MusicNotFound;
 import com.reproduction.musics.mapper.Mapper;
 import com.reproduction.musics.model.MusicEntity;
 import com.reproduction.musics.repository.MusicRepository;
@@ -24,6 +25,9 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public MusicResponse findMusicByTitle(String title) {
         Optional<MusicEntity> musicEntity = musicRepository.findByTitulo(title);
+        if (musicEntity.isEmpty()){
+            throw new MusicNotFound();
+        }
         MusicResponse musicResponse = mapper.entityToDtoMusic(musicEntity.get());
         return musicResponse;
     }
