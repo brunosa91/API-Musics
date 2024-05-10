@@ -4,6 +4,7 @@ import com.reproduction.musics.dto.ListRequest;
 import com.reproduction.musics.dto.ListResponse;
 import com.reproduction.musics.model.ListEntity;
 import com.reproduction.musics.service.ListService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class ListController {
         return ResponseEntity.ok(listService.findByNameList(name));
     }
     @PostMapping
-    public ResponseEntity<ListEntity> postList(@RequestBody ListRequest listRequest) {
+    public ResponseEntity<ListEntity> postList(@RequestBody @Valid ListRequest listRequest) {
         log.debug("PostList Saved {}",listRequest);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()

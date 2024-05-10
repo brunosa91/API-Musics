@@ -4,6 +4,7 @@ import com.reproduction.musics.dto.MusicRequest;
 import com.reproduction.musics.dto.MusicResponse;
 import com.reproduction.musics.model.MusicEntity;
 import com.reproduction.musics.service.MusicService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class MusicController {
     }
 
     @PostMapping
-    public ResponseEntity<MusicEntity> postMusic(@RequestBody MusicRequest musicRequest) {
+    public ResponseEntity<MusicEntity> postMusic(@RequestBody @Valid MusicRequest musicRequest) {
         log.debug("PostMusic Saved {}",musicRequest);
 
         URI uri = ServletUriComponentsBuilder
