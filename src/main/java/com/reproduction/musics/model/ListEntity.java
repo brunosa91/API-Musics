@@ -30,7 +30,7 @@ public class ListEntity implements Serializable {
     @PrimaryKeyJoinColumn
     @OneToMany(mappedBy = "lista", cascade = CascadeType.ALL)
     @JsonIgnore
-    List<MusicEntity> musicas = new ArrayList<>();
+    private List<MusicEntity> musicas = new ArrayList<>();
 
 }
 

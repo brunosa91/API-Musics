@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ListRepositoryTest {
+    
     @Autowired
     ListRepository listRepository;
     @Autowired

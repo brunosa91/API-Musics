@@ -17,5 +17,5 @@ public class ListResponse implements Serializable {
     private String nome;
     private String descricao;
 
-    List<MusicResponse> musicas = new ArrayList<>();
+    private List<MusicResponse> musicas = new ArrayList<>();
 }

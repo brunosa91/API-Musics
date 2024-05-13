@@ -56,6 +56,17 @@ public class ListServiceImpl implements ListService {
     }
 
     @Override
+    public ListResponse findByNameId(Long id) {
+        Optional <ListEntity> listEntity = listRepository.findById(id);
+        if(listEntity.isEmpty()){
+            throw new ListNotFound();
+        }
+        ListResponse listResponse = mapper.entityToDtoList(listEntity.get());
+        return listResponse ;
+
+    }
+
+    @Override
     public void deleteListByName(String name) {
         Optional <ListEntity> list = listRepository.findByNome(name);
         if(list.isEmpty()){

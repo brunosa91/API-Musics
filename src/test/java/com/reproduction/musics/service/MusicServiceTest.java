@@ -1,10 +1,13 @@
 package com.reproduction.musics.service;
 
 import com.reproduction.musics.dto.MusicResponse;
+import com.reproduction.musics.exceptions_handler.exceptions.ListNotFound;
 import com.reproduction.musics.exceptions_handler.exceptions.MusicNotFound;
 import com.reproduction.musics.mapper.Mapper;
 import com.reproduction.musics.model.MusicEntity;
+import com.reproduction.musics.repository.ListRepository;
 import com.reproduction.musics.repository.MusicRepository;
+import com.reproduction.musics.service.impl.ListServiceImpl;
 import com.reproduction.musics.service.impl.MusicServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,6 +29,8 @@ public class MusicServiceTest {
     MusicRepository musicRepository;
     @Mock
     Mapper mapper;
+    @Mock
+    private ListRepository listRepository;
 
     @Test
     void getMusicByTitle() {
@@ -51,14 +56,29 @@ public class MusicServiceTest {
 
     }
 
+
     @Test
     public void postMusic(){
         when(musicRepository.save(MUSIC_ENTITY)).thenReturn(MUSIC_ENTITY);
         when(mapper.dtoToEntityMusic(MUSIC_REQUEST)).thenReturn(MUSIC_ENTITY);
+        when(listRepository.findById(1L)).thenReturn(Optional.of(LIST_ENTITY));
 
         MusicEntity result = musicService.insertMusic(MUSIC_REQUEST);
         Assertions.assertThat(result).isEqualTo(MUSIC_ENTITY);
         verify(musicRepository,times(1)).save(MUSIC_ENTITY);
     }
+
+    @Test
+    public void postMusic_NotFoundList(){
+        when(mapper.dtoToEntityMusic(MUSIC_REQUEST)).thenReturn(MUSIC_ENTITY);
+        when(listRepository.findById(1L)).thenReturn(Optional.empty());
+
+        Assertions.assertThatExceptionOfType(ListNotFound.class)
+                .isThrownBy(() -> musicService.insertMusic(MUSIC_REQUEST));
+        verify(musicRepository,times(0)).save(MUSIC_ENTITY);
+        verify(listRepository,times(1)).findById(1l);
+    }
+
+
 
 }

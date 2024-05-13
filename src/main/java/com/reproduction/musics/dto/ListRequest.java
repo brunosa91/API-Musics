@@ -23,6 +23,5 @@ public class ListRequest implements Serializable {
     @NotNull
     @NotBlank
     private String descricao;
-
-    List<MusicRequest> musicas = new ArrayList<>();
+    private List<MusicRequest> musicas = new ArrayList<>();
 }

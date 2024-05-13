@@ -1,5 +1,4 @@
 package com.reproduction.musics.controller;
-
 import com.reproduction.musics.dto.ListRequest;
 import com.reproduction.musics.dto.ListResponse;
 import com.reproduction.musics.mapper.Mapper;
@@ -11,35 +10,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/list")
 @Slf4j
-
 public class ListController {
     @Autowired
     private ListService listService;
     @Autowired
     private Mapper mapper;
-
     @GetMapping
     public ResponseEntity<List<ListResponse>> getAllLists() {
         return ResponseEntity.ok(listService.findAllLists());
     }
-
     @GetMapping("/{name}")
     public ResponseEntity<ListResponse> getListByName(@PathVariable String name) {
-        log.debug("getListByName received {}",name);
+        log.debug("getListByName received {}", name);
 
         return ResponseEntity.ok(listService.findByNameList(name));
     }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<ListResponse> getListById(@PathVariable Long id) {
+        log.debug("getListByName received {}", id);
+
+        return ResponseEntity.ok(listService.findByNameId(id));
+    }
+
     @PostMapping
     public ResponseEntity<ListResponse> postList(@RequestBody @Valid ListRequest listRequest) {
-        log.debug("PostList Saved {}",listRequest);
+        log.debug("PostList Saved {}", listRequest);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}").buildAndExpand(listRequest.getId()).toUri();

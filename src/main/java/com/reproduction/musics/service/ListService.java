@@ -11,6 +11,7 @@ public interface ListService {
     ListEntity insertList(ListRequest listRequest);
     List<ListResponse> findAllLists();
     ListResponse findByNameList(String name);
+    ListResponse findByNameId(Long id);
     void deleteListByName(String name);
 
 

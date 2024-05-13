@@ -17,6 +17,7 @@ import java.net.URI;
 @RestController
 @RequestMapping(value = "/music")
 @Slf4j
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class MusicController {
     @Autowired
     private MusicService musicService;
