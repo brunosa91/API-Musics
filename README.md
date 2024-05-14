@@ -14,7 +14,8 @@ Este projeto visa criar uma API RESTful para gerenciar listas e músicas.
 - [Spring Boot](https://spring.io/projects/spring-boot)
 
 
-## Testes com o Postman
+## Testes com o Postman ou Swagger
+Quando subir aplicação, acessar URL http://localhost:8080/swagger-ui/index.html#
 
 Para testar a API, utilize o [Postman](https://www.postman.com/). Abaixo estão os endpoints disponíveis:
 
