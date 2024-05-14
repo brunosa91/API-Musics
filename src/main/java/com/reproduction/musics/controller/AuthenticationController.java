@@ -1,9 +1,11 @@
 package com.reproduction.musics.controller;
 
 import com.reproduction.musics.dto.AuthenticationDto;
+import com.reproduction.musics.dto.LoginResponseDto;
 import com.reproduction.musics.dto.RegisterDto;
 import com.reproduction.musics.model.User;
 import com.reproduction.musics.repository.UserRepository;
+import com.reproduction.musics.service.impl.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +23,17 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TokenService tokenService;
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDto authDto){
         var userNamePassword = new UsernamePasswordAuthenticationToken(authDto.getLogin(),authDto.getPassword());
         var auth = this.authenticationManager.authenticate(userNamePassword);
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+        return ResponseEntity.ok(new LoginResponseDto(token));
 
     }
 
