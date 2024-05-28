@@ -19,6 +19,7 @@ import java.util.List;
 import static com.reproduction.musics.constants.Constants.*;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,12 +35,13 @@ public class ListControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+
     @Test
     void getAllLists() throws Exception {
         List<ListResponse> list = new ArrayList<>();
         list.add(LIST_RESPONSE);
         when(listService.findAllLists()).thenReturn(list);
-        mockMvc.perform(get("/list"))
+        mockMvc.perform(get("/list").with(httpBasic("bruno", "123")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("[0].id").value(LIST_RESPONSE.getId()));
